@@ -12,10 +12,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 70vh;
+  justify-content: flex-start;
+  min-height: auto;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   margin: 1rem;
 }
 
@@ -281,8 +282,9 @@
   .card-reveal-screen {
     padding: 2rem;
     margin: 0.5rem;
-    max-height: 90vh;
-    overflow: hidden;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   
   .card-reveal-screen h2 {

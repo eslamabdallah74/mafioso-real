@@ -10,8 +10,10 @@
   max-width: 600px;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   margin: 1rem;
+  min-height: auto;
 }
 
 .setup-screen::before {
@@ -216,8 +218,9 @@
   .setup-screen {
     padding: 1.5rem;
     margin: 0.5rem;
-    max-height: 90vh;
-    overflow: hidden;
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   
   .setup-screen h2 {

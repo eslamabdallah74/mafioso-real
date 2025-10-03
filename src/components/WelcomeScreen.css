@@ -1,0 +1,446 @@
+/* Welcome Screen Component */
+.welcome-screen {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  overflow-y: auto;
+  padding: 2rem 0;
+}
+
+.welcome-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 136, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(136, 0, 255, 0.15) 0%, transparent 50%);
+  animation: backgroundPulse 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.welcome-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Brand Section */
+.brand-section {
+  margin-bottom: 4rem;
+  padding: 2rem 0;
+  animation: brandSlideIn 1s ease-out;
+}
+
+@keyframes brandSlideIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(-50px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.logo {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.logo-icon {
+  font-size: 8rem;
+  animation: logoFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.5));
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.brand-title {
+  font-size: 6rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, var(--accent-neon), var(--accent-blue), var(--accent-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
+  animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { 
+    text-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
+    transform: scale(1);
+  }
+  to { 
+    text-shadow: 0 0 60px rgba(0, 255, 136, 0.8);
+    transform: scale(1.02);
+  }
+}
+
+.brand-subtitle {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.brand-tagline {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* Features Section */
+.features-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+  padding: 2rem 0;
+  animation: featuresSlideIn 1s ease-out 0.3s both;
+}
+
+@keyframes featuresSlideIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(50px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.feature-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 25px;
+  padding: 2.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.feature-card:hover::before {
+  left: 100%;
+}
+
+.feature-card:hover {
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+  transform: translateY(-10px) scale(1.02);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  color: var(--accent-neon);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Instructions Section */
+.instructions-section {
+  margin-bottom: 4rem;
+  padding: 2rem 0;
+  animation: instructionsSlideIn 1s ease-out 0.6s both;
+}
+
+@keyframes instructionsSlideIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(50px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.instructions-section h3 {
+  font-size: 2.5rem;
+  color: var(--accent-blue);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(0, 136, 255, 0.3);
+}
+
+.instructions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.instruction-step {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.instruction-step:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 20px rgba(0, 136, 255, 0.3);
+  transform: translateY(-5px);
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 1rem;
+  box-shadow: 0 0 20px rgba(0, 136, 255, 0.5);
+}
+
+.instruction-step p {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Start Section */
+.start-section {
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  animation: startSlideIn 1s ease-out 0.9s both;
+}
+
+@keyframes startSlideIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(50px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.start-game-btn {
+  background: linear-gradient(45deg, var(--accent-neon), var(--accent-blue));
+  color: var(--bg-primary);
+  border: none;
+  padding: 2rem 4rem;
+  border-radius: 30px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto 1rem;
+  min-width: 300px;
+  justify-content: center;
+}
+
+.start-game-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.start-game-btn:hover::before {
+  left: 100%;
+}
+
+.start-game-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 50px rgba(0, 255, 136, 0.6);
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-icon {
+  font-size: 2rem;
+  animation: rocketBounce 1s ease-in-out infinite;
+}
+
+@keyframes rocketBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.start-hint {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Footer Section */
+.footer-section {
+  padding: 2rem 0;
+  animation: footerSlideIn 1s ease-out 1.2s both;
+}
+
+@keyframes footerSlideIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.footer-section p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .welcome-container {
+    padding: 1rem;
+  }
+  
+  .brand-title {
+    font-size: 4rem;
+  }
+  
+  .brand-subtitle {
+    font-size: 2rem;
+  }
+  
+  .brand-tagline {
+    font-size: 1.1rem;
+  }
+  
+  .logo-icon {
+    font-size: 6rem;
+  }
+  
+  .features-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .feature-card {
+    padding: 2rem;
+  }
+  
+  .instructions-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .instruction-step {
+    padding: 1.5rem;
+  }
+  
+  .start-game-btn {
+    padding: 1.5rem 3rem;
+    font-size: 1.5rem;
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-title {
+    font-size: 3rem;
+  }
+  
+  .brand-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .logo-icon {
+    font-size: 4rem;
+  }
+  
+  .feature-card {
+    padding: 1.5rem;
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+  }
+  
+  .start-game-btn {
+    padding: 1.2rem 2rem;
+    font-size: 1.3rem;
+    min-width: 200px;
+  }
+}

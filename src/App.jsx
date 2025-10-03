@@ -3,6 +3,7 @@ import './styles/global.css'
 import geminiService from './services/geminiService'
 
 // Import Components
+import WelcomeScreen from './components/WelcomeScreen'
 import SetupScreen from './components/SetupScreen'
 import StoryScreen from './components/StoryScreen'
 import CardRevealScreen from './components/CardRevealScreen'
@@ -11,7 +12,7 @@ import VotingScreen from './components/VotingScreen'
 import ResultScreen from './components/ResultScreen'
 
 function App() {
-  const [gameState, setGameState] = useState('setup') // setup, story, cardReveal, clues, voting, result
+  const [gameState, setGameState] = useState('welcome') // welcome, setup, story, cardReveal, clues, voting, result
   const [players, setPlayers] = useState([])
   const [currentStory, setCurrentStory] = useState(null)
   const [assignedJobs, setAssignedJobs] = useState([])
@@ -85,6 +86,10 @@ function App() {
     }
   }
 
+  const startFromWelcome = () => {
+    setGameState('setup')
+  }
+
   const nextPhase = () => {
     if (gameState === 'story') setGameState('cardReveal')
     else if (gameState === 'cardReveal') setGameState('clues')
@@ -147,7 +152,7 @@ function App() {
   }
 
   const resetGame = () => {
-    setGameState('setup')
+    setGameState('welcome')
     setPlayers([])
     setCurrentStory(null)
     setAssignedJobs([])
@@ -172,6 +177,12 @@ function App() {
   return (
     <div className="app">
       <div className="game-container">
+        {gameState === 'welcome' && (
+          <WelcomeScreen 
+            onStartGame={startFromWelcome}
+          />
+        )}
+
         {gameState === 'setup' && (
           <SetupScreen 
             players={players}
