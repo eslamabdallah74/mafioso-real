@@ -1,7 +1,7 @@
 import React from 'react'
 import './SetupScreen.css'
 
-const SetupScreen = ({ players, addPlayer, removePlayer, startGame }) => {
+const SetupScreen = ({ players, addPlayer, removePlayer, startGame, resetPlayers }) => {
   return (
     <div className="setup-screen">
       <h2>إعداد اللعبة</h2>
@@ -30,13 +30,24 @@ const SetupScreen = ({ players, addPlayer, removePlayer, startGame }) => {
         </div>
       )}
       
-      <button 
-        className="start-btn" 
-        onClick={startGame}
-        disabled={players.length < 3}
-      >
-        بدء اللعبة
-      </button>
+      <div className="action-buttons">
+        <button 
+          className="start-btn" 
+          onClick={startGame}
+          disabled={players.length < 3}
+        >
+          بدء اللعبة
+        </button>
+        
+        {players.length > 0 && (
+          <button 
+            className="reset-players-btn" 
+            onClick={resetPlayers}
+          >
+            مسح اللاعبين
+          </button>
+        )}
+      </div>
     </div>
   )
 }

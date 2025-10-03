@@ -1,7 +1,7 @@
 import React from 'react'
 import './ResultScreen.css'
 
-const ResultScreen = ({ gameResult, resetGame }) => {
+const ResultScreen = ({ gameResult, resetGame, playAgain }) => {
   return (
     <div className="result-screen">
       <h2>{gameResult.winner === 'players' ? '🎉 فوز اللاعبين!' : '💀 فوز المجرم!'}</h2>
@@ -14,9 +14,14 @@ const ResultScreen = ({ gameResult, resetGame }) => {
           </div>
         )}
       </div>
-      <button className="play-again-btn" onClick={resetGame}>
-        لعب مرة أخرى
-      </button>
+      <div className="result-actions">
+        <button className="play-again-btn" onClick={playAgain}>
+          لعب مرة أخرى
+        </button>
+        <button className="new-game-btn" onClick={resetGame}>
+          لعبة جديدة
+        </button>
+      </div>
     </div>
   )
 }

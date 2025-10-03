@@ -13,7 +13,11 @@ import ResultScreen from './components/ResultScreen'
 
 function App() {
   const [gameState, setGameState] = useState('welcome') // welcome, setup, story, cardReveal, clues, voting, result
-  const [players, setPlayers] = useState([])
+  const [players, setPlayers] = useState(() => {
+    // Load players from localStorage on component mount
+    const savedPlayers = localStorage.getItem('cau-players')
+    return savedPlayers ? JSON.parse(savedPlayers) : []
+  })
   const [currentStory, setCurrentStory] = useState(null)
   const [assignedJobs, setAssignedJobs] = useState([])
   const [currentClueIndex, setCurrentClueIndex] = useState(0)
@@ -26,6 +30,11 @@ function App() {
   const [cardRevealed, setCardRevealed] = useState(false)
   const [gameResult, setGameResult] = useState(null)
   const [wrongGuesses, setWrongGuesses] = useState(0)
+
+  // Save players to localStorage whenever players change
+  useEffect(() => {
+    localStorage.setItem('cau-players', JSON.stringify(players))
+  }, [players])
 
   // Initialize game with AI-generated content
   useEffect(() => {
@@ -88,6 +97,25 @@ function App() {
 
   const startFromWelcome = () => {
     setGameState('setup')
+  }
+
+  const resetPlayers = () => {
+    setPlayers([])
+    localStorage.removeItem('cau-players')
+  }
+
+  const playAgain = () => {
+    setGameState('setup')
+    setCurrentStory(null)
+    setAssignedJobs([])
+    setCurrentClueIndex(0)
+    setVotes({})
+    setCriminal(null)
+    setEliminatedPlayers([])
+    setCurrentPlayerIndex(0)
+    setCardRevealed(false)
+    setGameResult(null)
+    setWrongGuesses(0)
   }
 
   const nextPhase = () => {
@@ -189,6 +217,7 @@ function App() {
             addPlayer={addPlayer}
             removePlayer={removePlayer}
             startGame={startGame}
+            resetPlayers={resetPlayers}
           />
         )}
 
@@ -241,6 +270,7 @@ function App() {
               criminal: criminal?.player.name
             }}
             resetGame={resetGame}
+            playAgain={playAgain}
           />
         )}
       </div>
