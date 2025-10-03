@@ -1,0 +1,317 @@
+/* Voting Screen Component */
+.voting-screen {
+  background: var(--bg-card);
+  border-radius: 25px;
+  padding: 3rem;
+  border: 2px solid var(--accent-red);
+  box-shadow: 0 0 30px rgba(255, 68, 68, 0.3);
+  backdrop-filter: blur(15px);
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.voting-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.1), rgba(136, 0, 255, 0.1));
+  border-radius: 25px;
+  z-index: 0;
+}
+
+.voting-screen > * {
+  position: relative;
+  z-index: 1;
+}
+
+.voting-screen h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-red);
+  text-align: center;
+  text-shadow: 0 0 20px rgba(255, 68, 68, 0.3);
+  font-weight: 700;
+  animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { text-shadow: 0 0 20px rgba(255, 68, 68, 0.3); }
+  to { text-shadow: 0 0 30px rgba(255, 68, 68, 0.8); }
+}
+
+.voting-instruction {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+}
+
+.voting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.vote-btn {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Cairo', sans-serif;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  animation: voteButtonAppear 0.5s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  min-height: 80px;
+}
+
+@keyframes voteButtonAppear {
+  0% { 
+    opacity: 0; 
+    transform: translateY(20px) scale(0.9); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.vote-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 68, 68, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.vote-btn:hover:not(.disabled):not(.selected)::before {
+  left: 100%;
+}
+
+.vote-btn:hover:not(.disabled):not(.selected) {
+  border-color: var(--accent-red);
+  box-shadow: 0 0 30px rgba(255, 68, 68, 0.5);
+  transform: translateY(-5px) scale(1.02);
+  background: linear-gradient(135deg, var(--bg-secondary), rgba(255, 68, 68, 0.1));
+}
+
+.vote-btn.selected {
+  border-color: var(--accent-neon);
+  background: linear-gradient(135deg, var(--bg-secondary), rgba(0, 255, 136, 0.2));
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.vote-btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.player-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.vote-btn.selected .player-avatar {
+  background: linear-gradient(135deg, var(--accent-neon), var(--accent-blue));
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.player-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.player-info h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.player-info p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.selected-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  animation: selectedPulse 1s ease-in-out infinite;
+}
+
+@keyframes selectedPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.vote-counts {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.vote-count {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.vote-count:last-child {
+  border-bottom: none;
+}
+
+.submit-vote-btn {
+  background: linear-gradient(45deg, var(--accent-red), var(--accent-purple));
+  color: white;
+  border: none;
+  padding: 1.5rem 3rem;
+  border-radius: 20px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.submit-vote-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.submit-vote-btn:hover::before {
+  left: 100%;
+}
+
+.submit-vote-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 68, 68, 0.5);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .voting-screen {
+    padding: 2rem;
+    margin: 0.5rem;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+  
+  .voting-screen h2 {
+    font-size: 2rem;
+  }
+  
+  .voting-instruction {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .voting-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .vote-btn {
+    padding: 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .submit-vote-btn {
+    padding: 1.2rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .voting-screen {
+    padding: 1.5rem;
+    margin: 0.25rem;
+  }
+  
+  .voting-screen h2 {
+    font-size: 1.8rem;
+  }
+  
+  .voting-instruction {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  .vote-btn {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .vote-counts {
+    padding: 1rem;
+    max-height: 150px;
+  }
+  
+  .submit-vote-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
